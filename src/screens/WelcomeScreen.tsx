@@ -14,10 +14,10 @@ import Animated, {
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from 'lottie-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { assets, brand } from './brand';
-import { AuroraBackground } from './AuroraBackground';
-import { HeroVideo } from './HeroVideo';
-import { MagneticButton } from './MagneticButton';
+import { assets, brand } from '../brand';
+import { AuroraBackground } from '../components/AuroraBackground';
+import { HeroVideo } from '../components/HeroVideo';
+import { MagneticButton } from '../components/MagneticButton';
 
 const c = brand.colors;
 

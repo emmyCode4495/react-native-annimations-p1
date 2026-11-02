@@ -4,6 +4,7 @@
 
 export const brand = {
   name: 'Tallyo',
+  tagline: 'Money that moves',
   headline: ['Money that moves', 'at your speed.'],
   subline: 'Send, save and spend in one place. No hidden fees.',
   cta: 'Get started',
@@ -15,6 +16,10 @@ export const brand = {
     onAccent: '#1A1405',
     text: '#EEF2FF',
     muted: '#9AA6D1',
+    card: '#0F1630',
+    cardBorder: 'rgba(255,255,255,0.08)',
+    success: '#34D399',
+    danger: '#F87171',
   },
 };
 

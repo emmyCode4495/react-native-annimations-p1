@@ -1,56 +1,74 @@
-# Welcome to your Expo app 👋
+# Tallyo — Animated Fintech Onboarding (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Premium, production-feel animated flow for a fintech product:
 
-## Get started
+1. **Splash → Welcome** — Logo springs in, holds, then travels to the corner while the aurora intensifies and copy enters.
+2. **Auth (Login / Sign up)** — Segmented control, floating focus fields, magnetic CTA, social buttons.
+3. **Home** — Count-up balance, gradient cards carousel, quick actions, staggered transactions.
 
-1. Install dependencies
+Built for content / marketing demos: every transition is intentional, haptic-backed, and easy to reskin via `src/brand.ts`.
 
-   ```bash
-   npm install
-   ```
+## Stack
 
-2. Start the app
+- Expo SDK 58 + Expo Router
+- React Native Reanimated 4
+- Shopify Skia (aurora background)
+- Lottie (sparkle accent)
+- expo-video (optional Higgsfield hero loop)
+- expo-haptics + gesture-handler (magnetic button)
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Tap the invisible top-right square on the welcome screen to replay the splash sequence (useful for recording).
 
-### Other setup steps
+## Flow
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+| Screen   | Route   | Key interactions                          |
+|----------|---------|-------------------------------------------|
+| Welcome  | `/`     | Splash hold → logo travel → Get started   |
+| Auth     | `/auth` | Login ↔ Sign up toggle → social / CTA     |
+| Home     | `/home` | Balance count-up, cards, transactions     |
 
-## Learn more
+## Reskin
 
-To learn more about developing your project with Expo, look at the following resources:
+Edit `src/brand.ts`:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `name`, `headline`, `subline`, `cta`
+- `colors` (ink, indigo, coral, accent, …)
+- Optional: drop a muted 9:16 loop into `assets/higgsfield/hero.mp4` and set `assets.heroVideo`
 
-## Join the community
+## Optional Higgsfield hero
 
-Join our community of developers creating universal apps.
+1. Generate a seamless 6–10s vertical loop (muted).
+2. Place at `assets/higgsfield/hero.mp4`.
+3. In `src/brand.ts`:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```ts
+heroVideo: require('../assets/higgsfield/hero.mp4'),
+```
+
+The aurora becomes transparent so the video shows through.
+
+## Project layout
+
+```
+src/
+  app/           # Expo Router routes
+  components/    # AuroraBackground, MagneticButton, HeroVideo
+  screens/       # WelcomeScreen, AuthScreen, HomeScreen
+  brand.ts       # Single source of brand tokens
+assets/
+  lottie/        # sparkle.json
+  images/
+```
+
+## Recording tips
+
+- Use the top-right replay hit area for clean takes.
+- Dark mode only — designed for OLED demos.
+- Magnetic button feels best on device (haptics + large touch zone).
