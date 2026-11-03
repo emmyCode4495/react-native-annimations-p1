@@ -17,8 +17,8 @@ import * as Haptics from 'expo-haptics';
 // with a wobble. That oversized zone is what makes it feel magnetic on touch.
 const ZONE_W = 340;
 const ZONE_H = 150;
-const DEFAULT_BTN_W = 264;
-const DEFAULT_BTN_H = 64;
+const BTN_W = 264;
+const BTN_H = 64;
 
 const PULL = 0.32; // how much of the finger offset the button follows
 const MAX_X = 26;
@@ -33,8 +33,6 @@ type Props = {
   color: string;
   textColor: string;
   onPress?: () => void;
-  width?: number;
-  height?: number;
 };
 
 function limit(v: number, max: number) {
@@ -42,14 +40,7 @@ function limit(v: number, max: number) {
   return Math.max(-max, Math.min(max, v));
 }
 
-export function MagneticButton({
-  label,
-  color,
-  textColor,
-  onPress,
-  width = DEFAULT_BTN_W,
-  height = DEFAULT_BTN_H,
-}: Props) {
+export function MagneticButton({ label, color, textColor, onPress }: Props) {
   const tx = useSharedValue(0);
   const ty = useSharedValue(0);
   const pressed = useSharedValue(0);
@@ -127,27 +118,10 @@ export function MagneticButton({
   return (
     <GestureDetector gesture={gesture}>
       <View style={styles.zone} accessible accessibilityRole="button" accessibilityLabel={label}>
+        <Animated.View pointerEvents="none" style={[styles.ring, { borderColor: color }, ringStyle]} />
         <Animated.View
           pointerEvents="none"
-          style={[
-            styles.ring,
-            { width, height, borderRadius: height / 2, borderColor: color },
-            ringStyle,
-          ]}
-        />
-        <Animated.View
-          pointerEvents="none"
-          style={[
-            styles.button,
-            {
-              width,
-              height,
-              borderRadius: height / 2,
-              backgroundColor: color,
-              shadowColor: color,
-            },
-            buttonStyle,
-          ]}
+          style={[styles.button, { backgroundColor: color, shadowColor: color }, buttonStyle]}
         >
           <Animated.Text style={[styles.label, { color: textColor }, labelStyle]}>
             {label}
@@ -166,6 +140,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
+    width: BTN_W,
+    height: BTN_H,
+    borderRadius: BTN_H / 2,
     alignItems: 'center',
     justifyContent: 'center',
     shadowOpacity: 0.45,
@@ -175,6 +152,9 @@ const styles = StyleSheet.create({
   },
   ring: {
     position: 'absolute',
+    width: BTN_W,
+    height: BTN_H,
+    borderRadius: BTN_H / 2,
     borderWidth: 2,
   },
   label: {

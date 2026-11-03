@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><g transform="translate(0.0 0.0) scale(1.0)">
+<defs>
+  <radialGradient id="base" gradientUnits="userSpaceOnUse" cx="194.56" cy="153.6" r="460.8">
+    <stop offset="0" stop-color="#7D86FF"/><stop offset=".45" stop-color="#4F5BFF"/><stop offset="1" stop-color="#1A1F66"/>
+  </radialGradient>
+  <radialGradient id="coral" gradientUnits="userSpaceOnUse" cx="358.4" cy="368.64" r="189.44">
+    <stop offset="0" stop-color="#FF6B9A" stop-opacity=".9"/><stop offset="1" stop-color="#FF6B9A" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="gold" gradientUnits="userSpaceOnUse" cx="112.64" cy="389.12" r="148.48">
+    <stop offset="0" stop-color="#FFC857" stop-opacity=".75"/><stop offset="1" stop-color="#FFC857" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="light" gradientUnits="userSpaceOnUse" cx="358.4" cy="122.88" r="168.96">
+    <stop offset="0" stop-color="#9AA4FF" stop-opacity=".7"/><stop offset="1" stop-color="#9AA4FF" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="hl" gradientUnits="userSpaceOnUse" x1="0" y1="40.96" x2="0" y2="194.56">
+    <stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <clipPath id="orb"><circle cx="256.0" cy="256.0" r="256.0"/></clipPath>
+</defs>
+<g clip-path="url(#orb)">
+  <circle cx="256.0" cy="256.0" r="256.0" fill="url(#base)"/>
+  <circle cx="256.0" cy="256.0" r="512" fill="url(#coral)"/>
+  <circle cx="256.0" cy="256.0" r="512" fill="url(#gold)"/>
+  <circle cx="256.0" cy="256.0" r="512" fill="url(#light)"/>
+  <ellipse cx="220.16" cy="117.76" rx="133.12" ry="76.8" fill="url(#hl)" opacity=".5"/>
+  <rect x="120.3" y="245.8" width="66.6" height="122.9" rx="26.6" fill="#FFFFFF" fill-opacity="0.94"/><rect x="222.7" y="184.3" width="66.6" height="184.3" rx="26.6" fill="#FFFFFF" fill-opacity="0.94"/><rect x="325.1" y="112.6" width="66.6" height="256.0" rx="26.6" fill="#FFC857" fill-opacity="1"/>
+</g>
+<circle cx="256.0" cy="256.0" r="250.88" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="10.24"/>
+</g></svg>

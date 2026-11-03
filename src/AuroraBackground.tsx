@@ -9,7 +9,7 @@ import {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
-import { brand } from '../brand';
+import { brand } from './brand';
 
 const c = brand.colors;
 const TAU = Math.PI * 2;

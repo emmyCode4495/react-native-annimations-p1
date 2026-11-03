@@ -14,10 +14,12 @@ import Animated, {
 import { LinearGradient } from 'expo-linear-gradient';
 import LottieView from 'lottie-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { assets, brand } from '../brand';
-import { AuroraBackground } from '../components/AuroraBackground';
-import { HeroVideo } from '../components/HeroVideo';
-import { MagneticButton } from '../components/MagneticButton';
+import { assets, brand } from './brand';
+import { FlowBackground } from './FlowBackground';
+import { FloatingCards } from './components/FloatingCards';
+import { LogoMark } from './components/LogoMark';
+import { HeroVideo } from './HeroVideo';
+import { MagneticButton } from './MagneticButton';
 
 const c = brand.colors;
 
@@ -71,7 +73,7 @@ export function WelcomeScreen({ onStart }: Props) {
   return (
     <View style={styles.screen}>
       {assets.heroVideo != null && <HeroVideo source={assets.heroVideo} />}
-      <AuroraBackground intensity={intensity} transparent={assets.heroVideo != null} />
+      <FlowBackground intensity={intensity} transparent={assets.heroVideo != null} />
       <LinearGradient
         colors={['transparent', c.ink]}
         locations={[0.35, 1]}
@@ -80,12 +82,17 @@ export function WelcomeScreen({ onStart }: Props) {
       />
 
       <Animated.View style={[styles.logo, logoStyle]} pointerEvents="none">
+        {/* Rendered at 1.5x and scaled down so the mark stays crisp while it is enlarged on the splash */}
         <View style={styles.logoMark}>
-          <Text style={styles.logoGlyph}>T</Text>
+          <View style={styles.logoMarkInner}>
+            <LogoMark size={66} delay={450} />
+          </View>
         </View>
         <Text style={styles.logoName}>{brand.name}</Text>
         <LottieView source={assets.lottieSparkle} autoPlay loop style={styles.sparkle} />
       </Animated.View>
+
+      {welcome && <FloatingCards top={insets.top + 92} />}
 
       {welcome && (
         <View style={[styles.content, { paddingTop: insets.top + 90, paddingBottom: insets.bottom + 12 }]}>
@@ -132,20 +139,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
   },
-  logoMark: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    backgroundColor: c.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-    transform: [{ rotate: '-8deg' }],
-  },
-  logoGlyph: { fontSize: 24, fontWeight: '900', color: c.onAccent },
+  logoMark: { width: 44, height: 44 },
+  logoMarkInner: { position: 'absolute', left: -11, top: -11, width: 66, height: 66, transform: [{ scale: 2 / 3 }] },
   logoName: { fontSize: 22, fontWeight: '800', color: c.text, letterSpacing: -0.3 },
   sparkle: { position: 'absolute', left: 20, top: -30, width: 44, height: 44 },
   content: { ...StyleSheet.absoluteFill, paddingHorizontal: 28, justifyContent: 'space-between' },
-  copy: { flex: 1, justifyContent: 'center' },
+  copy: { flex: 1, justifyContent: 'flex-end', paddingBottom: 12 },
   headline: {
     fontSize: 46,
     lineHeight: 50,
