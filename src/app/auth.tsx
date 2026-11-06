@@ -30,6 +30,7 @@ import { brand } from '../brand';
 import { GlowInput } from '../components/GlowInput';
 import { LogoMark } from '../components/LogoMark';
 import { SubmitButton, SubmitStatus } from '../components/SubmitButton';
+import { useWallet } from '../wallet-store';
 
 const c = brand.colors;
 type Mode = 'login' | 'signup';
@@ -73,6 +74,7 @@ function Segmented({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void
 
 export default function Auth() {
   const insets = useSafeAreaInsets();
+  const { setProfile } = useWallet();
   const [mode, setMode] = useState<Mode>('signup');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -116,13 +118,17 @@ export default function Auth() {
       return;
     }
     setStatus('loading');
-    const first = (name.trim() || email.split('@')[0]).split(' ')[0];
+    const raw = name.trim() || email.trim().split('@')[0];
+    const display = raw.charAt(0).toUpperCase() + raw.slice(1);
     timers.current.push(
       setTimeout(() => {
         setStatus('success');
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         timers.current.push(
-          setTimeout(() => router.replace({ pathname: '/home', params: { name: first } }), 1500),
+          setTimeout(() => {
+            setProfile({ name: display, email: email.trim() });
+            router.replace('/home');
+          }, 1500),
         );
       }, 1500),
     );

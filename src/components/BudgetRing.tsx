@@ -7,10 +7,10 @@ import { brand } from '../brand';
 const c = brand.colors;
 const STROKE = 10;
 
-type Props = { size: number; progress: number; delay?: number };
+type Props = { size: number; progress: number; delay?: number; label?: string };
 
 // Ring that fills to `progress` (0..1) with a round cap and a sweep gradient.
-export function BudgetRing({ size, progress, delay = 0 }: Props) {
+export function BudgetRing({ size, progress, delay = 0, label = 'used' }: Props) {
   const fill = useSharedValue(0);
 
   const arc = useMemo(() => {
@@ -34,7 +34,7 @@ export function BudgetRing({ size, progress, delay = 0 }: Props) {
       </Canvas>
       <View style={[StyleSheet.absoluteFill, styles.center]}>
         <Text style={styles.pct}>{Math.round(progress * 100)}%</Text>
-        <Text style={styles.sub}>used</Text>
+        <Text style={styles.sub}>{label}</Text>
       </View>
     </View>
   );
